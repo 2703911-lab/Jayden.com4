@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - WebGlow Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e1b4b, #3b0764, #4c1d95);
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .glossy-text {
+            color: #ffffff;
+            background: linear-gradient(45deg, #ffffff, #d1d5db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        .aura-button {
+            background: linear-gradient(45deg, #8b5cf6, #ec4899, #f59e0b);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+        }
+        .aura-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.8);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starsCanvas"></canvas>
+    <header class="py-8 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold glossy-text">Our Pricing Plans</h1>
+        <p class="mt-2 text-lg md:text-xl glossy-text">Pick a plan to ignite your website’s cosmic potential</p>
+    </header>
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="p-6 card rounded-xl shadow-lg text-center">
+                <h3 class="text-2xl font-semibold glossy-text mb-4">Basic</h3>
+                <p class="text-3xl font-bold glossy-text mb-4">$0 <span class="text-sm glossy-text">/ forever</span></p>
+                <ul class="glossy-text text-left mb-6">
+                    <li class="mb-2">✓ Basic website audit</li>
+                    <li class="mb-2">✓ Simple design refresh</li>
+                    <li class="mb-2">✓ Standard support</li>
+                </ul>
+                <a href="#" class="aura-button text-white font-semibold py-2 px-6 rounded-full inline-block">Choose Basic</a>
+            </div>
+            <div class="p-6 card rounded-xl shadow-lg text-center">
+                <h3 class="text-2xl font-semibold glossy-text mb-4">Pro</h3>
+                <p class="text-3xl font-bold glossy-text mb-4">$300 <span class="text-sm glossy-text">/ one-time</span></p>
+                <ul class="glossy-text text-left mb-6">
+                    <li class="mb-2">✓ Comprehensive redesign</li>
+                    <li class="mb-2">✓ Performance optimization</li>
+                    <li class="mb-2">✓ Priority support</li>
+                </ul>
+                <a href="#" class="aura-button text-white font-semibold py-2 px-6 rounded-full inline-block">Choose Pro</a>
+            </div>
+            <div class="p-6 card rounded-xl shadow-lg text-center">
+                <h3 class="text-2xl font-semibold glossy-text mb-4">Premium</h3>
+                <p class="text-3xl font-bold glossy-text mb-4">$500 <span class="text-sm glossy-text">/ one-time</span></p>
+                <ul class="glossy-text text-left mb-6">
+                    <li class="mb-2">✓ Full website overhaul</li>
+                    <li class="mb-2">✓ Advanced SEO & analytics</li>
+                    <li class="mb-2">✓ 24/7 premium support</li>
+                </ul>
+                <a href="#" class="aura-button text-white font-semibold py-2 px-6 rounded-full inline-block">Choose Premium</a>
+            </div>
+        </section>
+        <section class="text-center">
+            <a href="index.html" class="glossy-text hover:text-gray-300 transition-colors">Back to Home</a>
+        </section>
+    </main>
+    <footer class="py-6 text-center glossy-text">
+        <p>&copy; 2025 WebGlow Studio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('starsCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        const shootingStars = [];
+
+        // Create falling stars with pulsating effect
+        for (let i = 0; i < 400; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 0.5,
+                speed: Math.random() * 1.2 + 0.5,
+                opacity: Math.random() * 0.7 + 0.3,
+                color: `hsl(${Math.random() * 100 + 150}, 80%, ${Math.random() * 30 + 60}%)`,
+                pulse: Math.random() * 0.02 + 0.01
+            });
+        }
+
+        // Create shooting stars with pulsating effect
+        function createShootingStar() {
+            const startX = Math.random() * canvas.width;
+            const startY = Math.random() * canvas.height / 3;
+            shootingStars.push({
+                x: startX,
+                y: startY,
+                length: 120 + Math.random() * 80,
+                speed: 12 + Math.random() * 12,
+                angle: Math.PI / 4 + Math.random() * Math.PI / 4,
+                opacity: Math.random() * 0.6 + 0.4,
+                color: `hsl(${Math.random() * 100 + 150}, 85%, ${Math.random() * 30 + 50}%)`,
+                pulse: Math.random() * 0.03 + 0.02
+            });
+        }
+
+        let time = 0;
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time += 0.05;
+
+            // Draw falling stars with pulse
+            stars.forEach(star => {
+                const pulseFactor = 1 + Math.sin(time + star.pulse) * 0.2;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius * pulseFactor, 0, Math.PI * 2);
+                ctx.fillStyle = star.color;
+                ctx.globalAlpha = star.opacity * (0.8 + Math.sin(time + star.pulse) * 0.2);
+                ctx.fill();
+                star.y += star.speed;
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+            ctx.globalAlpha = 1;
+
+            // Draw shooting stars with pulse
+            shootingStars.forEach((star, index) => {
+                const pulseFactor = 1 + Math.sin(time + star.pulse) * 0.3;
+                ctx.beginPath();
+                ctx.moveTo(star.x, star.y);
+                const endX = star.x + star.length * Math.cos(star.angle) * pulseFactor;
+                const endY = star.y + star.length * Math.sin(star.angle) * pulseFactor;
+                ctx.lineTo(endX, endY);
+                ctx.strokeStyle = star.color;
+                ctx.lineWidth = 4 * pulseFactor;
+                ctx.globalAlpha = star.opacity * (0.7 + Math.sin(time + star.pulse) * 0.3);
+                ctx.stroke();
+                star.x -= star.speed * Math.cos(star.angle);
+                star.y -= star.speed * Math.sin(star.angle);
+                if (star.x < 0 || star.y > canvas.height) {
+                    shootingStars.splice(index, 1);
+                }
+            });
+            ctx.globalAlpha = 1;
+
+            requestAnimationFrame(animate);
+        }
+
+        // Spawn shooting stars frequently
+        setInterval(createShootingStar, 400);
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
